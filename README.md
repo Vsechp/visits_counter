@@ -3,7 +3,7 @@
 Скопируйте проект в директорию с сервером 
 
 ```
-https://github.com/Vsechp/visits_counter
+git clone https://github.com/Vsechp/visits_counter
 ```
 
 Создайте базу данных в папке database с именем databse.sqlite и подключите ее, заполните поле файла .env 
