@@ -7,7 +7,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <canvas id="hourlyVisitsChart" width="200" height="100"></canvas>
+                <canvas id="hourlyVisitsChart" width="400" height="200"></canvas>
             </div>
             <div class="col-md-6">
                 <div id="cityDistributionChart" style="width: 300px; height: 300px;"></div>
@@ -16,24 +16,27 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-
                 const hourlyStats = @json($hourlyStats);
                 const labels = hourlyStats.map(entry => entry.hour);
                 const data = hourlyStats.map(entry => entry.total);
+
                 const hourlyData = {
                     labels: labels,
                     datasets: [{
                         label: 'Visits by Hour',
                         data: data,
-                        backgroundColor: 'rgba(140, 150, 160, 0.5)',
-                        borderColor: 'rgba(100, 100, 100, 1)',
-                        borderWidth: 1,
+                        fill: false,
+                        borderColor: 'rgba(132, 132, 132, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(132, 132, 132, 1)',
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
                     }]
                 };
 
                 const ctx = document.getElementById('hourlyVisitsChart').getContext('2d');
                 const hourlyVisitsChart = new Chart(ctx, {
-                    type: 'bar',
+                    type: 'line',
                     data: hourlyData,
                     options: {
                         scales: {
@@ -47,11 +50,15 @@
                             },
                             y: {
                                 beginAtZero: true,
-                                stepSize: 1,
                                 title: {
                                     display: true,
-                                    text: 'Unique visits'
+                                    text: 'Unique Visits'
                                 }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
                             }
                         }
                     }
